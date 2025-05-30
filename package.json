@@ -1,0 +1,23 @@
+{
+  "name": "helpstress---principal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch src/db/db.json --port 3000 --static ./src/public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thiaguinnl/HelpstressMain.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thiaguinnl/HelpstressMain/issues"
+  },
+  "homepage": "https://github.com/Thiaguinnl/HelpstressMain#readme",
+  "description": "",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
