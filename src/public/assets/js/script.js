@@ -27,25 +27,25 @@ const cardsData = [
 // Dados dos depoimentos
 const testimonialsData = [
     {
-        quote: "Nosso time de conteúdo se move muito mais rápido na implantação de páginas web. Slices tornam o processo de ideação para implantação mais rápido, mantendo a qualidade da nossa marca.",
-        author: "Yuriy Mikitchenko",
-        title: "Growth Marketing Director",
+        quote: "Como designer gráfica, minha rotina é cheia de prazos e, muitas vezes, de muita pressão. Este site tem sido um verdadeiro refúgio. Os exercícios caseiros me ajudaram a relaxar e as dicas para lidar com a ansiedade foram um divisor de águas. Sinto-me mais focada e menos sobrecarregada. Recomendo muito!",
+        author: "Ana Paula",
+        title: "Designer Gráfica",
         companyLogo: "assets/img/LOGO.png",
-        authorPhoto: "assets/img/user.png"
+        authorPhoto: "assets/img/ana.jpg"
     },
     {
-        quote: "A plataforma transformou a maneira como lidamos com a ansiedade. É um recurso inestimável para a nossa equipe.",
-        author: "Outro Usuário",
-        title: "Cargo",
+        quote: "A vida acadêmica pode ser bastante estressante, e eu buscava uma forma de entender melhor e gerenciar minha ansiedade. A qualidade dos artigos aqui é impressionante, e a seção de estudos me permitiu aprofundar meu conhecimento sobre o tema. É um recurso valioso para quem busca bem-estar mental de forma séria e informada.",
+        author: "Carlos Alberto",
+        title: "Professor Universitário",
         companyLogo: "assets/img/LOGO.png",
-        authorPhoto: "assets/img/user.png"
+        authorPhoto: "assets/img/carlos.jpg"
     },
     {
-        quote: "Recomendo a todos que buscam apoio e ferramentas práticas para gerenciar o estresse.",
-        author: "Mais Um Usuário",
-        title: "Cargo",
+        quote: "Gerenciar meu próprio negócio é um desafio constante, e a ansiedade era uma barreira enorme. As técnicas funcionais que encontrei aqui me deram ferramentas práticas para o dia a dia. Além disso, os relatos de outras pessoas na comunidade me fizeram sentir que não estou sozinha. É um apoio incrível!",
+        author: "Mariana Silva",
+        title: "Empreendedora",
         companyLogo: "assets/img/LOGO.png",
-        authorPhoto: "assets/img/user.png"
+        authorPhoto: "assets/img/mariana.jpg"
     }
 ];
 
@@ -68,7 +68,6 @@ function criarCards() {
     });
 }
 
-// Função para gerar o HTML do carrossel de depoimentos
 function generateTestimonialsCarousel() {
     let carouselHTML = `
         <section class="testimonials-section">
@@ -116,7 +115,7 @@ let currentIndex = 0;
 // Função para renderizar um card específico
 function renderCard(index) {
   const card = document.getElementById("card-display");
-  const testimonial = testimonialsData[index]; // Usando seus dados existentes
+  const testimonial = testimonialsData[index]; 
   card.innerHTML = `
     <div class="testimonial-header">
         <img src="${testimonial.companyLogo}" alt="Company Logo" class="company-logo">
@@ -140,25 +139,114 @@ function renderCard(index) {
   `;
 }
 
-// Funções de navegação (mantidas da sua sugestão)
 function nextCard() {
-  currentIndex = (currentIndex + 1) % testimonialsData.length; // Usando seus dados
+  currentIndex = (currentIndex + 1) % testimonialsData.length;
   renderCard(currentIndex);
 }
 
 function prevCard() {
-  currentIndex = (currentIndex - 1 + testimonialsData.length) % testimonialsData.length; // Usando seus dados
+  currentIndex = (currentIndex - 1 + testimonialsData.length) % testimonialsData.length;
   renderCard(currentIndex);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     criarCards();
-
-    // Remover a animação ScrollReveal para os cards
-
-    // Inicializa com o primeiro card usando a nova lógica
     renderCard(currentIndex);
 });
 
-// Remover o código de animação GSAP para a linha esquerda
+// Scroll
+document.querySelectorAll('.nav-links a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
 
+        const targetId = this.getAttribute('href');
+        if (targetId && targetId !== '#') {
+            gsap.to(window, {
+                scrollTo: {
+                    y: targetId,
+                    offsetY: 70 
+                },
+                duration: 1,
+                ease: 'power2.inOut'
+            });
+        }
+    });
+});
+
+//  ScrollReveal
+const sr = ScrollReveal({
+    origin: 'bottom',
+    distance: '60px',
+    duration: 1000,
+    delay: 200,
+    easing: 'cubic-bezier(0.5, 0, 0, 1)',
+    reset: false
+});
+
+gsap.registerPlugin(ScrollTrigger);
+
+// Animação dos cards de "Entendendo a Ansiedade"
+gsap.from('.entendendo-ansiedade-section .card', {
+    scrollTrigger: {
+        trigger: '.entendendo-ansiedade-section',
+        start: 'top center+=100',
+        toggleActions: 'play none none reverse'
+    },
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.2,
+    ease: 'power3.out'
+});
+
+// Animação da seção "Comunidade"
+gsap.from('.comunidade-content', {
+    scrollTrigger: {
+        trigger: '.comunidade',
+        start: 'top center+=100',
+        toggleActions: 'play none none reverse'
+    },
+    y: 100,
+    opacity: 0,
+    duration: 1.5,
+    ease: 'power3.out'
+});
+
+// Animação dos elementos decorativos da comunidade
+gsap.from('.linha-esquerda', {
+    scrollTrigger: {
+        trigger: '.comunidade',
+        start: 'top center+=100',
+        toggleActions: 'play none none reverse'
+    },
+    x: -200,
+    opacity: 0,
+    duration: 1.5,
+    ease: 'power3.out'
+});
+
+gsap.from('.linha-direita', {
+    scrollTrigger: {
+        trigger: '.comunidade',
+        start: 'top center+=100',
+        toggleActions: 'play none none reverse'
+    },
+    x: 200,
+    opacity: 0,
+    duration: 1.5,
+    ease: 'power3.out'
+});
+
+// Animação do footer
+gsap.from('.footer-section', {
+    scrollTrigger: {
+        trigger: 'footer',
+        start: 'top bottom-=100',
+        toggleActions: 'play none none reverse'
+    },
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.2,
+    ease: 'power3.out'
+});
