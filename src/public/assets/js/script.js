@@ -86,7 +86,7 @@ function generateTestimonialsCarousel() {
                 </div>
                 <hr class="testimonial-divider">
                 <div class="testimonial-content">
-                    <p class="quote">"${testimonial.quote}"</p>
+                    <p class="quote"><img src="/assets/img/aspas.png" alt="Aspas">"${testimonial.quote}"</p>
                 </div>
                 <hr class="testimonial-divider">
                 <div class="testimonial-footer">
@@ -125,7 +125,7 @@ function renderCard(index) {
     </div>
     <hr class="testimonial-divider">
     <div class="testimonial-content">
-        <p class="quote">"${testimonial.quote}"</p>
+        <p class="quote"><img src="/assets/img/aspas.png" alt="Aspas">${testimonial.quote}</p>
     </div>
     <hr class="testimonial-divider">
     <div class="testimonial-footer">

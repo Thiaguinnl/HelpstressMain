@@ -525,7 +525,6 @@ footer {
     width: 100%;
     padding-top: 300px;
     padding-bottom: 170px;
-    max-width: 700px;
     position: relative;
     margin: 0 auto;
 }
@@ -538,8 +537,8 @@ footer {
     padding: 30px;
     text-align: left;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    width: 100%;
-    max-width: 700px;
+    width: 1000px;
+    max-width: 1000px;
     flex-shrink: 0;
     margin: auto;
     position: relative;
@@ -569,6 +568,17 @@ footer {
     color: #555;
     line-height: 1.6;
     margin: 0;
+    display: flex;
+    align-items: flex-start;
+    padding-right: 50px;
+}
+
+.testimonial-content .quote img {
+    width: 39px;
+    height: auto;
+    margin-right: 10px;
+    position: relative;
+    top: -10px;
 }
 
 .testimonial-footer {
