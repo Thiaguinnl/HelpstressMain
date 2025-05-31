@@ -17,29 +17,81 @@ body {
     background: transparent;
     max-width: 100%;
     box-sizing: border-box;
+    position: relative;
 }
+
 .logo {
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 1.5rem;
 }
+
 .nav-links {
     list-style: none;
     display: flex;
     gap: 30px;
     margin: 0;
     padding: 0;
+    position: static;
+    right: auto;
+    width: auto;
+    height: auto;
+    background: transparent;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 0;
+    transition: none;
+    overflow-y: visible;
 }
+
 .nav-links li a {
     text-decoration: none;
     color: #fff;
     font-size: 1.1rem;
     font-weight: 190;
     transition: color 0.2s;
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
 }
+
 .nav-links li a:hover {
     color: #2196f3;
+    background-color: transparent;
+}
+
+.icone-usuario {
+    display: block;
+}
+
+.menu-hamburguer {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.menu-hamburguer span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.mobile-menu-logo {
+    display: none;
+}
+
+.mobile-user-icon {
+    display: none;
 }
 
 .hero-section {
@@ -287,9 +339,9 @@ header {
 }
 
 .comunidade-content h1 {
-    color: #1F392C; 
+    color: #1F392C;
     font-size: 5.5rem; 
-    font-weight: 300; 
+    font-weight: 300;
     margin-bottom: 20px;
     line-height: 1.2;
 }
@@ -522,6 +574,65 @@ footer {
     margin-top: 2rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(0, 0, 0, 0.514);
+}
+
+/* Footer Responsividade */
+@media (max-width: 970px) {
+    footer {
+        padding: 2rem 3%;
+        margin-top: 80px;
+    }
+
+    .footer-conteudo {
+        gap: 4rem;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 1.5rem 3%;
+        margin-top: 60px;
+    }
+
+    .footer-conteudo {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-section h3 {
+        margin-bottom: 0.8rem;
+    }
+
+    .social-links a {
+        font-size: 14px;
+    }
+
+    .footer-bottom {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 1rem 2%;
+        margin-top: 40px;
+    }
+
+    .footer-section h3 {
+        font-size: 1rem;
+    }
+
+    .social-links a {
+        font-size: 13px;
+    }
+
+    .footer-bottom {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        font-size: 0.9rem;
+    }
 }
 
 /* Avaliações */
@@ -1013,4 +1124,599 @@ span.\&class {
     .entendendo-ansiedade-cards {
         gap: 20px;
     }
+}
+
+@media (max-width: 480px) {
+    .comunidade-content h1 {
+        font-size: 8vw;
+        padding: 0 5px;
+        line-height: 1.1;
+        width: 100%;
+        text-align: center;
+    }
+
+    .comunidade-content p {
+        font-size: 0.85rem;
+        margin-top: 15px;
+    }
+
+    .comunidade-btn {
+        width: 150px;
+        padding: 0.6rem 1.2rem;
+        font-size: 10px;
+    }
+
+    .comunidade-content::before {
+        top: 40px;
+        height: 150px;
+        filter: blur(10px);
+    }
+}
+
+@media (max-width: 1090px) {
+    .spline-background {
+        display: none;
+    }
+
+    .dicas-tecnicas-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+        width: 100%;
+        gap: 30px;
+        box-sizing: border-box;
+    }
+
+    .dicas-tecnicas-content h2 {
+        font-size: 3rem;
+        color: #252432;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    .dicas-tecnicas-content h2 span {
+        display: inline;
+    }
+
+    span.\&class {
+        padding-left: 0;
+        margin: 0 8px;
+    }
+
+    .dicas-card {
+        background-color: #fff;
+        padding: 30px 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 700px;
+        box-sizing: border-box;
+        display: block;
+        visibility: visible;
+        margin: 0;
+    }
+
+    .dicas-card h3 {
+        font-size: 1.4rem;
+        color: #252432;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .dicas-card .subtitle {
+        font-size: 1rem;
+        color: #8987A1;
+        margin: 0 0 20px 0;
+        line-height: 1.6;
+        text-align: justify;
+        width: 100%;
+    }
+
+    .dicas-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 30px 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px 25px;
+        justify-items: start;
+        width: 100%;
+    }
+
+    .dicas-card li img {
+        width: 22px;
+        height: 22px;
+        vertical-align: middle;
+        margin-right: 8px;
+    }
+
+    .dicas-btn {
+        width: 80%;
+        max-width: 300px;
+        height: 60px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .dicas-tecnicas-content img[alt="Gradiente decorativo"] {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        height: auto;
+        z-index: -1;
+        opacity: 0.4;
+    }
+}
+
+@media (max-width: 970px) {
+    .navbar {
+        padding: 10px 20px;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 60px;
+        transition: right 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .nav-links li a {
+        font-size: 1.5rem;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.2s ease;
+    }
+
+    .nav-links li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .icone-usuario {
+        display: none;
+    }
+
+    .menu-hamburguer {
+        display: block;
+    }
+
+    .menu-hamburguer span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+        border-radius: 2px;
+    }
+
+    .menu-hamburguer.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-hamburguer.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-hamburguer.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .oferecemos-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card p {
+        display: none;
+    }
+
+    .card h3 {
+        margin-bottom: 0;
+    }
+
+    .card-icon-wrapper {
+        margin-bottom: 10px;
+    }
+
+    .oferecemos-container {
+        padding: 40px 20px;
+    }
+
+    .oferecemos-container h2 {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .mobile-user-icon {
+        display: block;
+        margin-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 20px;
+    }
+
+    .mobile-user-icon a {
+        padding: 0;
+        background: none;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .mobile-menu-logo {
+        margin-bottom: 30px;
+    }
+
+    .mobile-menu-logo img {
+        width: 100px;
+        height: auto;
+    }
+
+    .comunidade-content h1 {
+        font-size: 4em;
+        line-height: 1.2;
+    }
+
+    .comunidade-content p {
+        font-size: 0.9rem;
+        margin-top: 20px;
+    }
+
+    .comunidade-btn {
+        width: 180px;
+        padding: 0.7rem 1.5rem;
+        font-size: 11px;
+    }
+
+    .comunidade-content::before {
+        top: 50px;
+        height: 200px;
+        filter: blur(15px);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 6vw;
+        line-height: 1.2;
+        width: 100%;
+        text-align: center;
+    }
+
+    .oferecemos-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        max-width: 400px;
+    }
+
+    .dicas-tecnicas-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .dicas-card {
+        padding: 25px 15px;
+    }
+
+    .dicas-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .dicas-card ul {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .dicas-card li img {
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+    }
+
+    .dicas-btn {
+        width: 90%;
+        height: 50px;
+        font-size: 13px;
+    }
+
+    .dicas-tecnicas-content img[alt="Gradiente decorativo"] {
+        top: 20px;
+        width: 100%;
+        opacity: 0.3;
+    }
+
+    .comunidade img {
+        display: none;
+    }
+
+    .testimonial-card {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .social-icons {
+        display: none;
+    }
+
+    .comunidade-content {
+        padding: 0 10px;
+    }
+
+    .comunidade-content h1 {
+        font-size: 6vw;
+        line-height: 1.2;
+        width: 100%;
+    }
+
+    .comunidade-content p {
+        font-size: 0.9rem;
+        margin-top: 20px;
+    }
+
+    .comunidade-btn {
+        width: 180px;
+        padding: 0.7rem 1.5rem;
+        font-size: 11px;
+    }
+
+    .comunidade-content::before {
+        top: 50px;
+        height: 200px;
+        filter: blur(15px);
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px 15px 0 15px;
+    }
+
+    .logo img {
+        width: 100px;
+    }
+
+    .nav-links {
+        width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .oferecemos-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .dicas-tecnicas-content h2 {
+        font-size: 2rem;
+    }
+
+    .comunidade-content h1 {
+        font-size: 8vw;
+        padding: 0 5px;
+        line-height: 1.1;
+        width: 100%;
+    }
+
+    .comunidade-content p {
+        font-size: 0.85rem;
+        margin-top: 15px;
+    }
+
+    .testimonial-card {
+        width: 95%;
+    }
+
+    .testimonial-content .quote {
+        font-size: 1rem;
+    }
+
+    .author-photo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .author-info .author-name {
+        font-size: 1rem;
+    }
+
+    .author-info .author-title {
+        font-size: 0.8rem;
+    }
+
+    .dicas-card .subtitle {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    .dicas-card ul {
+        gap: 10px;
+    }
+
+    .dicas-card li img {
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+    }
+
+    .dicas-btn {
+        width: 95%;
+        height: 45px;
+        font-size: 12px;
+    }
+
+    .dicas-tecnicas-content img[alt="Gradiente decorativo"] {
+        top: 10px;
+        opacity: 0.2;
+    }
+
+    .comunidade-btn {
+        width: 150px;
+        padding: 0.6rem 1.2rem;
+        font-size: 10px;
+    }
+
+    .comunidade-content::before {
+        top: 40px;
+        height: 150px;
+        filter: blur(10px);
+    }
+}
+
+/* Ajuste mínimo de largura */
+@media (max-width: 400px) {
+    body {
+        min-width: 400px;
+        overflow-x: auto;
+    }
+}
+
+/* Ajuste mínimo de altura */
+@media (max-height: 970px) {
+    .hero-section {
+        min-height: 970px;
+    }
+}
+
+/* O que oferecemos Responsividade restaurada */
+@media (max-width: 960px) {
+    .oferecemos-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 0;
+        justify-items: center;
+    }
+
+    .card {
+        padding: 20px;
+        width: 100%;
+        max-width: 350px;
+        align-items: center;
+        text-align: center;
+        margin: 0;
+    }
+
+    .card p {
+        display: none;
+    }
+
+    .card h3 {
+        margin-bottom: 0;
+    }
+
+    .card-icon-wrapper {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .oferecemos-cards {
+        grid-template-columns: 1fr;
+        max-width: 350px;
+        gap: 15px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .card-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 8px;
+    }
+
+    .card-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .card h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .oferecemos-container h2 {
+        font-size: 2rem;
+    }
+
+    .oferecemos-cards {
+        max-width: 300px;
+        gap: 10px;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .card-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 5px;
+    }
+
+    .card-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .card h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Estilos para telas <= 768px */
+@media (max-width: 768px) {
+    .testimonials-section {
+        padding: 60px 0;
+        margin-top: 100px;
+    }
+
+    .carousel-container {
+        padding-top: 50px;
+        padding-bottom: 170px;
+        position: relative;
+        margin: 0 auto;
+    }
+}
+
+.mobile-menu-logo {
+    display: none;
 }

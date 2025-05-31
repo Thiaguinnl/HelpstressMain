@@ -152,6 +152,23 @@ function prevCard() {
 document.addEventListener('DOMContentLoaded', () => {
     criarCards();
     renderCard(currentIndex);
+
+    // Menu Mobile
+    const menuHamburguer = document.querySelector('.menu-hamburguer');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuHamburguer.addEventListener('click', () => {
+        menuHamburguer.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuHamburguer.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
 });
 
 // Scroll
