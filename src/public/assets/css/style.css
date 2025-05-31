@@ -64,10 +64,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 150px; /* Altura do gradiente, ajuste conforme necessário */
+    height: 150px; 
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #fff 100%);
-    z-index: 1; /* Garante que fique acima do conteúdo da seção hero */
-    pointer-events: none; /* Permite cliques através do gradiente */
+    z-index: 1; 
+    pointer-events: none; 
 }
 
 .hero-content {
@@ -245,12 +245,11 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 18px; /* Espaço entre o wrapper e o título */
+    margin-bottom: 18px;
 }
 .card-icon {
-    width: 40px; /* Tamanho menor do ícone */
-    height: 40px; /* Tamanho menor do ícone */
-    /* margin-bottom: 18px; */ /* Removido, agora no wrapper */
+    width: 40px; 
+    height: 40px; 
 }
 .card h3 {
     font-size: 1.3rem;
@@ -886,5 +885,122 @@ span.\&class {
 
     .dicas-card {
         max-width: 100%;
+    }
+}
+
+/* Entendendo a Ansiedade */
+.entendendo-ansiedade-section {
+    padding: 60px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.entendendo-ansiedade-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.entendendo-ansiedade-section h2 {
+    font-size: 2.5rem;
+    color: #252432;
+    margin-bottom: 40px;
+    font-weight: 700;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.title-with-lines {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.title-with-lines h2 {
+    margin: 0 20px;
+    margin-bottom: 0;
+}
+
+.title-with-lines::before,
+.title-with-lines::after {
+    content: '';
+    flex-grow: 1;
+    height: 2px;
+    background-color: #2563EB;
+    max-width: 400px;
+}
+
+.title-with-lines::before {
+    margin-right: 20px;
+}
+
+.title-with-lines::after {
+    margin-left: 20px;
+}
+
+.line-img {
+    display: none;
+}
+
+.entendendo-ansiedade-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.entendendo-ansiedade-cards .card {
+    background: #FFFFFF;
+    box-shadow: none;
+    padding: 32px 24px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    border-radius: 15px;
+    transition: none;
+    filter: none;
+}
+
+.entendendo-ansiedade-cards .card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.entendendo-ansiedade-cards .card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #252432;
+}
+
+.entendendo-ansiedade-cards .card p {
+    font-size: 1rem;
+    color: #8987A1;
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+}
+
+.entendendo-ansiedade-cards .card a {
+    text-decoration: none;
+    color: #2196f3;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.entendendo-ansiedade-cards .card a:hover {
+    color: #1769aa;
+}
+
+@media (max-width: 900px) {
+    .entendendo-ansiedade-cards .card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .entendendo-ansiedade-cards {
+        gap: 20px;
     }
 }
