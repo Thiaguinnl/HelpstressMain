@@ -1598,7 +1598,6 @@ span.\&class {
     }
 }
 
-/* Ajuste mínimo de largura */
 @media (max-width: 400px) {
     body {
         min-width: 400px;
@@ -1606,14 +1605,12 @@ span.\&class {
     }
 }
 
-/* Ajuste mínimo de altura */
 @media (max-height: 970px) {
     .hero-section {
         min-height: 970px;
     }
 }
 
-/* O que oferecemos Responsividade restaurada */
 @media (max-width: 960px) {
     .oferecemos-cards {
         display: grid;
@@ -1702,7 +1699,6 @@ span.\&class {
     }
 }
 
-/* Estilos para telas <= 768px */
 @media (max-width: 768px) {
     .testimonials-section {
         padding: 60px 0;
