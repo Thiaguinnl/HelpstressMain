@@ -3,24 +3,24 @@ gsap.registerPlugin(DrawSVGPlugin);
 // Dados dos cards
 const cardsData = [
     {
-        titulo: "Suporte 24/7",
-        descricao: "Acesso a profissionais de saúde mental e comunidade de apoio a qualquer momento",
-        icone: "assets/img/diagn.png"
+        titulo: "Estudos",
+        descricao: "Explore nossa seção de artigos para um estudo e compreensão aprofundada da sua ansiedade.",
+        icone: "assets/img/artigo.png"
     },
     {
-        titulo: "Técnicas de Respiração",
-        descricao: "Exercícios guiados para ajudar no controle da ansiedade",
-        icone: "assets/img/saude.png"
+        titulo: "Dicas & Técnicas",
+        descricao: "Nesta seção, você encontrará um conjunto de dicas práticas e técnicas eficazes para ajudar a manejar e reduzir os sintomas da ansiedade no dia a dia.",
+        icone: "assets/img/dicas.png"
     },
     {
-        titulo: "Diário de Humor",
-        descricao: "Acompanhe seu estado emocional e identifique padrões",
-        icone: "assets/img/cuidados.png"
+        titulo: "Comunidade",
+        descricao: "Conecte-se e compartilhe experiências nossa comunidade é um espaço seguro e acolhedor onde você pode encontrar apoio, trocar ideias e aprender com os relatos de quem entende o que você está passando.",
+        icone: "assets/img/comunidade.png"
     },
     {
-        titulo: "Meditações",
-        descricao: "Sessões de meditação guiada para diferentes níveis",
-        icone: "assets/img/meditacao.png"
+        titulo: "Sua Opinião Importa",
+        descricao: "Utilize a área de avaliação para nos dar seu feedback, avaliar a qualidade do conteúdo, e nos ajudar a evoluir para atender cada vez melhor às suas necessidades.",
+        icone: "assets/img/estrela.png"
     }
 ];
 
@@ -52,12 +52,14 @@ const testimonialsData = [
 function criarCards() {
     const cardsContainer = document.getElementById('oferecemos-cards');
     
-    cardsData.forEach(card => {
+    cardsData.forEach((card, index) => {
         const cardElement = document.createElement('div');
         cardElement.className = 'card';
         
         cardElement.innerHTML = `
-            <img src="${card.icone}" alt="${card.titulo}" class="card-icon">
+            <div class="card-icon-wrapper">
+                <img src="${card.icone}" alt="${card.titulo}" class="card-icon">
+            </div>
             <h3>${card.titulo}</h3>
             <p>${card.descricao}</p>
         `;

@@ -196,60 +196,75 @@ header {
 }
 .oferecemos-container {
     width: 100%;
-    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 70px 80px 90px;
     box-sizing: border-box;
     position: relative;
     z-index: 10;
     overflow-x: hidden;
 }
 .oferecemos-container h2 {
-    color: #424242;
-    font-size: 2.5rem;
+    color: #252432;
+    font-size: 2.8rem;
     font-weight: 700;
-    margin-bottom: 32px;
+    margin-bottom: 62px;
     text-align: left;
+    font-family: 'Raleway', sans-serif;
 }
 .oferecemos-cards {
     display: flex;
     flex-wrap: nowrap;
-    gap: 15px;
+    gap: 30px;
     justify-content: center;
 }
 .card {
-    background: #3a3a3a;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    background: #F5F8FF;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     padding: 32px 24px;
-    flex: 1;
     min-width: 0;
     max-width: none;
-    width: auto;
+    width: 450px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, filter 0.3s ease-in-out;
+    filter: blur(2px);
 }
 .card:hover {
     transform: translateY(-8px) scale(1.03);
     box-shadow: 0 8px 24px rgba(33,150,243,0.13);
+    filter: none;
+}
+.card-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px; /* Espaço entre o wrapper e o título */
 }
 .card-icon {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 18px;
+    width: 40px; /* Tamanho menor do ícone */
+    height: 40px; /* Tamanho menor do ícone */
+    /* margin-bottom: 18px; */ /* Removido, agora no wrapper */
 }
 .card h3 {
     font-size: 1.3rem;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 10px;
-    color: #ffffff;
+    color: #252432;
+    font-family: 'Inter', sans-serif;
 }
 .card p {
     font-size: 1rem;
-    color: #ffffff;
+    color: #8987A1;
     margin: 0;
     line-height: 1.5;
+    font-family: 'Inter', sans-serif;
 }
 @media (max-width: 900px) {
     .card {
@@ -314,7 +329,7 @@ header {
     transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); 
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
     letter-spacing: 0.7px;
     width: 200px;
 }
@@ -676,4 +691,200 @@ footer {
 
 .testimonial-nav-buttons .right:hover {
      background-color: #333;
+}
+
+/* Dicas & Técnicas */
+.dicas-tecnicas-section {
+    position: relative;
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+}
+
+.dicas-tecnicas-content {
+    max-width: 1320px;
+    width: 110%;
+    padding: 0 24px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    z-index: 2;
+    position: relative;
+    justify-content: space-between;
+}
+
+.dicas-tecnicas-content h2 {
+    font-size: 3.5rem;
+    color: #252432;
+    margin: 0;
+    padding-top: 100px;
+    padding-left: 100px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.dicas-tecnicas-content h2 span {
+    margin-bottom: 5px;
+}
+
+.dicas-tecnicas-content h2 span:last-child {
+    margin-bottom: 0;
+}
+
+span.\&class {
+    padding-left: 70px;
+}
+
+.dicas-tecnicas-content .subtitle {
+    font-size: 1rem;
+    color: #8987A1;
+    margin-top: 10px;
+    margin-right: 150px;
+}
+
+.spline-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120%;
+    height: 160%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.spline-background iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.dicas-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+.dicas-card h3 {
+    font-size: 1.5rem;
+    color: #252432;
+    margin-bottom: 30px;
+
+}
+
+.dicas-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 30px;
+}
+
+.dicas-card li {
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 1rem;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.dicas-card li i {
+    display: none;
+}
+
+.dicas-card li img {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.dicas-btn {
+    background: linear-gradient(45deg, #1a56db, #04c0ff);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    letter-spacing: 0.7px;
+    width: 70%;
+    height: 70px;
+    display: block;
+    margin: 20px auto 0 auto;
+}
+
+.dicas-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(45deg, #1a56db, #04c0ff);
+}
+
+.dicas-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.2);
+}
+
+.dicas-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.dicas-btn:hover::before {
+    left: 100%;
+}
+
+.dicas-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: 0.5s;
+}
+
+.dicas-btn:hover::after {
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+@media (max-width: 768px) {
+    .dicas-tecnicas-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dicas-tecnicas-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .dicas-card {
+        max-width: 100%;
+    }
 }
