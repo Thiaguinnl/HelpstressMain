@@ -9,11 +9,15 @@ body {
     overflow-x: hidden;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 20px 0 20px;
+    padding: 14px 70px 0 70px;
     background: transparent;
     max-width: 100%;
     box-sizing: border-box;
@@ -1255,7 +1259,18 @@ span.\&class {
 
 @media (max-width: 970px) {
     .navbar {
-        padding: 10px 20px;
+        grid-template-columns: auto 1fr auto;
+    }
+
+    .nav-left, .nav-right {
+        display: none;
+    }
+
+    .btn-criar-conta {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 10px 30px;
+        font-size: 15px;
     }
 
     .nav-links {
@@ -1716,3 +1731,97 @@ span.\&class {
 .mobile-menu-logo {
     display: none;
 }
+
+.btn-criar-conta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 8px 24px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-criar-conta:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-criar-conta:active {
+    transform: translateY(1px);
+}
+
+.btn-criar-conta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.btn-criar-conta:hover::before {
+    left: 100%;
+}
+
+.btn-criar-conta img {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+    background: rgba(214, 214, 214, 0.322);
+    padding: 6px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-criar-conta:hover img {
+    transform: scale(1.1);
+}
+
+/* Estilo quando o usuário está logado */
+.btn-criar-conta.logged-in {
+    padding: 8px;
+    width: 54px;
+    height: 54px;
+    justify-content: center;
+}
+
+.btn-criar-conta.logged-in img {
+    height: 48px;
+    width: 48px;
+    margin-right: 0;
+}
+
+@media (max-width: 768px) {
+    .btn-criar-conta {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 10px 30px;
+        font-size: 15px;
+    }
+
+    .btn-criar-conta.logged-in {
+        padding: 8px;
+        width: 36px;
+        height: 36px;
+    }
+}
+

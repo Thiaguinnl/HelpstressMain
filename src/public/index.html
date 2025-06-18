@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -36,10 +37,22 @@
                 <li><a href="#entendendo-ansiedade">Sobre ansiedade</a></li>
                 <li><a href="#dicas-tecnicas">Dicas & Técnicas</a></li>
                 <li><a href="#comunidade">Comunidade</a></li>
-                <li class="mobile-user-icon"><a href="#"><img src="/assets/img/user.png" alt="Usuário" height="32"></a></li>
+                <li class="mobile-user-icon">
+                    <div id="user-not-logged-in-mobile">
+                        <button class="btn-criar-conta"><img src="/assets/img/user.png" alt="Usuário" height="20"> Fazer Login</button>
+                    </div>
+                    <div id="user-logged-in-mobile" class="hidden">
+                        <button class="btn-criar-conta logged-in"><img src="/assets/img/user.png" alt="Usuário" height="58" width="58" id="mobile-user-profile-img"></button>
+                    </div>
+                </li>
             </ul>
             <div class="icone-usuario">
-                <img src="/assets/img/user.png" alt="Usuário" height="32">
+                <div id="user-not-logged-in-desktop">
+                    <button class="btn-criar-conta"><img src="/assets/img/user.png" alt="Usuário" height="20"> Fazer Login</button>
+                </div>
+                <div id="user-logged-in-desktop" class="hidden">
+                    <button class="btn-criar-conta logged-in"><img src="/assets/img/user.png" alt="Usuário" height="58" width="58" id="desktop-user-profile-img"></button>
+                </div>
             </div>
         </nav>
     </header>
@@ -111,7 +124,7 @@
                     <li><img src="/assets/img/V.svg" alt="Checkmark"> Estratégias e truques funcionais</li>
                     <li><img src="/assets/img/V.svg" alt="Checkmark"> Relatos e experiências de outras pessoas</li>
                 </ul>
-                <button class="dicas-btn">Dicas & Tecnicas</button>
+                <button class="dicas-btn" onclick="window.location.href='dicasTecnicas.html'">Dicas & Tecnicas</button>
                 <div class="spline-background">
                     <iframe src='https://my.spline.design/abstract3diconset-9toPczSO0oLKIyACRbVIMf3x/' frameborder='0' width='100%' height='100%'></iframe>
                 </div>
@@ -134,7 +147,7 @@
         </div>
         <div class="comunidade-content">
             <h1>Não se sinta sozinho junte-se a todos nós</h1>
-            <button class="comunidade-btn">COMUNIDADE</button>
+            <button class="comunidade-btn" onclick="window.location.href='comunidadeOFF.html'">COMUNIDADE</button>
             <p>Nosso time colaborou com futuros profissionais na aréa e juntos criamos um ambiente seguro para nossos
                 usuarios, nossa comunidade conta com mais 100.000 usuarios e profissionais que ajudam em tempo real.</p>
         </div>
@@ -143,7 +156,7 @@
     <section class="carousel-section">
       <div class="carousel-container">
         <div class="testimonial-card" id="card-display">
-          <!-- Card será carregado aqui pelo JS -->
+          <!-- Card será carregado aqui pelo js -->
         </div>
       </div>
     </section>
@@ -179,6 +192,18 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script>
+        function redirecionarComunidade(event) {
+            event.preventDefault();
+            const token = localStorage.getItem('token');
+            if (token) {
+                window.location.href = 'comunidade.html';
+            } else {
+                window.location.href = 'comunidadeOFF.html';
+            }
+        }
+    </script>
 </body>
 
 </html>

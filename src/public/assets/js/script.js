@@ -112,7 +112,6 @@ function generateTestimonialsCarousel() {
 
 let currentIndex = 0;
 
-// Função para renderizar um card específico
 function renderCard(index) {
   const card = document.getElementById("card-display");
   const testimonial = testimonialsData[index]; 
@@ -162,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.classList.toggle('active');
     });
 
-    // Fechar menu ao clicar em um link
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             menuHamburguer.classList.remove('active');
