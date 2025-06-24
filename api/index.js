@@ -151,4 +151,6 @@ server.get('/', (req, res) => {
 
 server.use(router);
 
-module.exports = server; 
+server.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+}); 
