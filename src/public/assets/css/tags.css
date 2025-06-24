@@ -16,16 +16,20 @@ body {
 }
 
 .tag {
-  background: #e2e8f0;
+  background: #a9c2e4;
   color: #475569;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  user-select: none;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
+  font-weight: 400;
+  margin: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.tag.editable-tag {
+  cursor: pointer;
+  background-color: #e0e0e0;
 }
 
 .tag:hover {

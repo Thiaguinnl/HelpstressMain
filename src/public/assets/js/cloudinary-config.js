@@ -3,7 +3,7 @@ const CLOUDINARY_CONFIG = {
     CLOUD_NAME: 'dsh5vvzyv', 
     UPLOAD_PRESET: 'helpstress_avatars', 
     FOLDER: 'avatars',
-    MAX_FILE_SIZE: 5 * 1024 * 1024, 
+    MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
     ALLOWED_TYPES: ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']
 };
 
@@ -12,7 +12,6 @@ async function uploadToCloudinary(file) {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', CLOUDINARY_CONFIG.UPLOAD_PRESET);
-        formData.append('folder', CLOUDINARY_CONFIG.FOLDER);
 
         const response = await fetch(
             `https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.CLOUD_NAME}/image/upload`,
@@ -22,14 +21,22 @@ async function uploadToCloudinary(file) {
             }
         );
 
-        if (!response.ok) {
-            throw new Error('Erro no upload');
+        let data;
+        try {
+            data = await response.json();
+        } catch (e) {
+            const text = await response.text();
+            throw new Error('Resposta inesperada do Cloudinary: ' + text);
         }
 
-        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.error?.message || 'Erro no upload');
+        }
+
         return data.secure_url;
     } catch (error) {
         console.error('Erro no upload para Cloudinary:', error);
+        alert('Erro ao enviar imagem para o Cloudinary: ' + (error.message || error));
         throw error;
     }
 }
@@ -41,7 +48,7 @@ function validateImageFile(file) {
     }
 
     if (file.size > CLOUDINARY_CONFIG.MAX_FILE_SIZE) {
-        alert('A imagem deve ter no máximo 5MB.');
+        alert('A imagem deve ter no máximo 10MB.');
         return false;
     }
 

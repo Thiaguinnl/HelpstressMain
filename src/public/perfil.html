@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/assets/css/cadastro.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/tags.css"> 
+    <link rel="stylesheet" href="/assets/css/comunidade.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,6 +101,13 @@
         if (mobileMenuBtn) {
             mobileMenuBtn.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
+            });
+        }
+
+        const shareBtn = document.querySelector('.share-post-button');
+        if (shareBtn) {
+            shareBtn.addEventListener('click', function() {
+                window.location.href = '.comunidade.html#postahgem';
             });
         }
     </script>
