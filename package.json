@@ -2,9 +2,13 @@
   "name": "helpstress",
   "version": "1.0.0",
   "description": "Sistema de gerenciamento de estresse",
-  "main": "server.js",
+  "main": "index.js",
+  "engines": {
+    "node": "22.16.0"
+  },
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js",
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
