@@ -134,6 +134,10 @@ server.patch('/usuarios/:id', verifyToken, (req, res) => {
     });
 });
 
+server.get('/', (req, res) => {
+  res.json({ mensagem: 'Hello World do backend Helpstress!' });
+});
+
 server.use(router);
 
 module.exports = server; 
