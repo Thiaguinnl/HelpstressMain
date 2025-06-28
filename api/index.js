@@ -78,7 +78,9 @@ server.post('/register', (req, res) => {
         return res.status(409).json({ mensagem: 'Email já cadastrado.' });
     }
 
-    const newUserId = db.get('usuarios').size().value() + 1;
+    const usuarios = db.get('usuarios').value();
+    const maxId = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id)) : 0;
+    const newUserId = maxId + 1;
     const newUser = { 
         id: newUserId, 
         nome, 
