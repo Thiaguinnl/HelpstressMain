@@ -6,13 +6,8 @@ const baseDir = process.env.RENDER ? '/data' : path.join(__dirname, 'db');
 
 console.log('🚀 Iniciando Helpstress Backend...');
 
-// Garante que o diretório base existe
-if (!fs.existsSync(baseDir)) {
-  fs.mkdirSync(baseDir, { recursive: true });
-  console.log('📁 Diretório base criado.');
-}
-
-// Garante que o arquivo db.json existe
+// NÃO tente criar o diretório baseDir se for /data no Render!
+// Apenas garanta que o arquivo db.json existe
 const dbFile = path.join(baseDir, 'db.json');
 if (!fs.existsSync(dbFile)) {
   const initialData = {
