@@ -6,19 +6,30 @@ const baseDir = process.env.RENDER ? '/data' : path.join(__dirname, 'db');
 
 console.log('🚀 Iniciando Helpstress Backend...');
 
-// NÃO tente criar o diretório baseDir se for /data no Render!
-// Apenas garanta que o arquivo db.json existe
-const dbFile = path.join(baseDir, 'db.json');
-if (!fs.existsSync(dbFile)) {
-  const initialData = {
-    usuarios: [],
-    depoimentos: [],
-    posts: [],
-    likedPosts: [],
-    savedItems: []
-  };
-  fs.writeFileSync(dbFile, JSON.stringify(initialData, null, 2), 'utf-8');
-  console.log('📄 Arquivo db.json inicializado.');
+// Só cria o arquivo db.json se baseDir existir
+if (fs.existsSync(baseDir)) {
+  const dbFile = path.join(baseDir, 'db.json');
+  if (!fs.existsSync(dbFile)) {
+    const initialData = {
+      usuarios: [],
+      depoimentos: [],
+      posts: [],
+      likedPosts: [],
+      savedItems: []
+    };
+    fs.writeFileSync(dbFile, JSON.stringify(initialData, null, 2), 'utf-8');
+    console.log('📄 Arquivo db.json inicializado.');
+  }
+} else {
+  console.error('❌ Diretório base não existe:', baseDir);
+  process.exit(1);
+}
+
+// Garante que o diretório de backups existe (se necessário)
+const backupDir = path.join(baseDir, 'backups');
+if (!fs.existsSync(backupDir)) {
+  fs.mkdirSync(backupDir, { recursive: true });
+  console.log('📁 Diretório de backups criado.');
 }
 
 // Sincroniza arquivos
