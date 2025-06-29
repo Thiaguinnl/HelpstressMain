@@ -23,13 +23,12 @@ function saveToOriginal() {
       log('Arquivo temporário não existe. Pulando salvamento.');
       return;
     }
-    
     const data = fs.readFileSync(tempDbPath, 'utf-8');
-    // Verifica se o JSON é válido antes de salvar
     JSON.parse(data);
-    
     fs.writeFileSync(originalDbPath, data, 'utf-8');
     log('Dados salvos no arquivo original com sucesso.');
+    // Força atualização do backup sempre que salvar o original
+    createBackup();
   } catch (err) {
     log('Erro ao salvar dados no arquivo original: ' + err.message);
   }
