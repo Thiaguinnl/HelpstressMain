@@ -52,7 +52,7 @@ async function quickTest() {
     console.log('✅ Status final OK');
 
     console.log('\n🎯 TESTE RÁPIDO CONCLUÍDO!');
-    console.log('Se todos os itens estão ✅, a persistência básica está funcionando!');
+    console.log('Se todos os itens estão ok, a persistência básica está funcionando!');
 
   } catch (error) {
     console.error('❌ Erro no teste:', error.response?.data || error.message);
