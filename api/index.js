@@ -4,6 +4,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const originalDbPath = path.join(__dirname, '..', 'db', 'db.json');
 const tempDbPath = '/tmp/db.json';
+const dbManager = require('./db-manager');
 
 const port = process.env.PORT || 3000;
 
@@ -150,6 +151,55 @@ server.patch('/usuarios/:id', verifyToken, (req, res) => {
 server.get('/', (req, res) => {
   res.json({ mensagem: 'Hello World do backend Helpstress!' });
 });
+
+// Sincroniza arquivos ao iniciar
+try {
+  dbManager.syncFiles();
+} catch (err) {
+  dbManager.log('Erro ao sincronizar arquivos no início: ' + err.message);
+}
+
+// Backup automático a cada 5 minutos
+setInterval(() => {
+  dbManager.createBackup();
+}, 5 * 60 * 1000);
+
+// Middleware para persistir dados após operações de escrita
+server.use((req, res, next) => {
+  const writeMethods = ['POST', 'PUT', 'PATCH', 'DELETE'];
+  if (writeMethods.includes(req.method)) {
+    res.on('finish', () => {
+      dbManager.saveToOriginal();
+      dbManager.createBackup();
+    });
+  }
+  next();
+});
+
+// Rota para status do banco
+server.get('/api/status', (req, res) => {
+  res.json(dbManager.getStatus());
+});
+
+// Rota para restaurar backup
+server.post('/api/restore-backup', (req, res) => {
+  const ok = dbManager.restoreBackup();
+  if (ok) {
+    return res.json({ mensagem: 'Backup restaurado com sucesso.' });
+  } else {
+    return res.status(500).json({ mensagem: 'Falha ao restaurar backup.' });
+  }
+});
+
+// Handlers para salvar dados antes de encerrar
+function gracefulShutdown(signal) {
+  dbManager.log(`Recebido sinal ${signal}. Salvando dados antes de encerrar...`);
+  dbManager.saveToOriginal();
+  dbManager.createBackup();
+  process.exit(0);
+}
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
 
 server.use(router);
 
