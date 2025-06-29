@@ -2,17 +2,18 @@ const fs = require('fs');
 const path = require('path');
 const dbManager = require('./api/db-manager');
 
+const baseDir = process.env.RENDER ? '/data' : path.join(__dirname, 'db');
+
 console.log('🚀 Iniciando Helpstress Backend...');
 
-// Garante que o diretório db existe
-const dbDir = path.join(__dirname, 'db');
-if (!fs.existsSync(dbDir)) {
-  fs.mkdirSync(dbDir, { recursive: true });
-  console.log('📁 Diretório db criado.');
+// Garante que o diretório base existe
+if (!fs.existsSync(baseDir)) {
+  fs.mkdirSync(baseDir, { recursive: true });
+  console.log('📁 Diretório base criado.');
 }
 
 // Garante que o arquivo db.json existe
-const dbFile = path.join(dbDir, 'db.json');
+const dbFile = path.join(baseDir, 'db.json');
 if (!fs.existsSync(dbFile)) {
   const initialData = {
     usuarios: [],

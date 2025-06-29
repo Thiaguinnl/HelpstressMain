@@ -2,8 +2,9 @@ const jsonServer = require('json-server');
 const path = require('path');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
-const originalDbPath = path.join(__dirname, '..', 'db', 'db.json');
-const tempDbPath = path.join(__dirname, '..', 'db', 'temp-db.json');
+const baseDir = process.env.RENDER ? '/data' : path.join(__dirname, '..', 'db');
+const originalDbPath = path.join(baseDir, 'db.json');
+const tempDbPath = path.join(baseDir, 'temp-db.json');
 const dbManager = require('./db-manager');
 
 const port = process.env.PORT || 3000;

@@ -1,9 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const originalDbPath = path.join(__dirname, '..', 'db', 'db.json');
-const tempDbPath = path.join(__dirname, '..', 'db', 'temp-db.json');
-const backupDir = path.join(__dirname, '..', 'db', 'backups');
+const baseDir = process.env.RENDER ? '/data' : path.join(__dirname, '..', 'db');
+const originalDbPath = path.join(baseDir, 'db.json');
+const tempDbPath = path.join(baseDir, 'temp-db.json');
+const backupDir = path.join(baseDir, 'backups');
 const backupFile = path.join(backupDir, 'db-backup.json');
 
 function log(msg) {
