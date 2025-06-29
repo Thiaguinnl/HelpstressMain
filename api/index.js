@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const originalDbPath = path.join(__dirname, '..', 'db', 'db.json');
-const tempDbPath = '/tmp/db.json';
+const tempDbPath = path.join(__dirname, '..', 'db', 'temp-db.json');
 const dbManager = require('./db-manager');
 
 const port = process.env.PORT || 3000;
@@ -18,6 +18,18 @@ const middlewares = jsonServer.defaults({ static: path.join(process.cwd(), 'publ
 const db = router.db;
 
 const SECRET_KEY = 'sua_chave_secreta_aqui';
+
+// Sincroniza arquivos ao iniciar
+try {
+  dbManager.syncFiles();
+} catch (err) {
+  dbManager.log('Erro ao sincronizar arquivos no início: ' + err.message);
+}
+
+// Backup automático a cada 5 minutos
+setInterval(() => {
+  dbManager.createBackup();
+}, 5 * 60 * 1000);
 
 function generateToken(payload) {
     return jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
@@ -58,6 +70,29 @@ server.use((req, res, next) => {
 server.use(middlewares);
 
 server.use(jsonServer.bodyParser);
+
+// Middleware para persistir dados após operações de escrita - DEVE VIR ANTES DAS ROTAS
+server.use((req, res, next) => {
+  const writeMethods = ['POST', 'PUT', 'PATCH', 'DELETE'];
+  if (writeMethods.includes(req.method)) {
+    const originalSend = res.send;
+    res.send = function(data) {
+      originalSend.call(this, data);
+      
+      // Salva dados após a resposta ser enviada
+      setTimeout(() => {
+        try {
+          dbManager.log(`Salvando dados após ${req.method} ${req.url}`);
+          dbManager.saveToOriginal();
+          dbManager.createBackup();
+        } catch (err) {
+          dbManager.log(`Erro ao persistir dados: ${err.message}`);
+        }
+      }, 100);
+    };
+  }
+  next();
+});
 
 server.use((err, req, res, next) => {
     console.error('Erro interno do servidor:', err);
@@ -152,30 +187,6 @@ server.get('/', (req, res) => {
   res.json({ mensagem: 'Hello World do backend Helpstress!' });
 });
 
-// Sincroniza arquivos ao iniciar
-try {
-  dbManager.syncFiles();
-} catch (err) {
-  dbManager.log('Erro ao sincronizar arquivos no início: ' + err.message);
-}
-
-// Backup automático a cada 5 minutos
-setInterval(() => {
-  dbManager.createBackup();
-}, 5 * 60 * 1000);
-
-// Middleware para persistir dados após operações de escrita
-server.use((req, res, next) => {
-  const writeMethods = ['POST', 'PUT', 'PATCH', 'DELETE'];
-  if (writeMethods.includes(req.method)) {
-    res.on('finish', () => {
-      dbManager.saveToOriginal();
-      dbManager.createBackup();
-    });
-  }
-  next();
-});
-
 // Rota para status do banco
 server.get('/api/status', (req, res) => {
   res.json(dbManager.getStatus());
@@ -188,6 +199,26 @@ server.post('/api/restore-backup', (req, res) => {
     return res.json({ mensagem: 'Backup restaurado com sucesso.' });
   } else {
     return res.status(500).json({ mensagem: 'Falha ao restaurar backup.' });
+  }
+});
+
+// Rota para forçar sincronização manual
+server.post('/api/sync', (req, res) => {
+  try {
+    dbManager.syncFiles();
+    res.json({ mensagem: 'Sincronização forçada realizada com sucesso.' });
+  } catch (err) {
+    res.status(500).json({ mensagem: 'Erro na sincronização: ' + err.message });
+  }
+});
+
+// Rota para forçar backup manual
+server.post('/api/backup', (req, res) => {
+  try {
+    dbManager.createBackup();
+    res.json({ mensagem: 'Backup manual criado com sucesso.' });
+  } catch (err) {
+    res.status(500).json({ mensagem: 'Erro ao criar backup: ' + err.message });
   }
 });
 
