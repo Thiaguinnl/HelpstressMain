@@ -1,4 +1,5 @@
 const axios = require('axios');
+const path = require('path');
 
 const BASE_URL = process.env.TEST_URL || 'http://localhost:3000';
 
