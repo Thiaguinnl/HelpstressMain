@@ -6,10 +6,20 @@ const originalDbPath = path.join(__dirname, '..', 'db', 'db.json');
 const tempDbPath = path.join(__dirname, '..', 'db', 'temp-db.json');
 const dbManager = require('./db-manager');
 
+const isRender = process.env.RENDER === '1';
+const dataDir = isRender ? '/data' : path.join(__dirname, '..', 'db');
+const dbPath = path.join(dataDir, 'db.json');
+
 const port = process.env.PORT || 3000;
 
+// Garante que o arquivo db.json existe
+if (!fs.existsSync(dbPath)) {
+  fs.writeFileSync(dbPath, JSON.stringify({ usuarios: [], depoimentos: [], posts: [], likedPosts: [], savedItems: [] }, null, 2));
+  console.log(`📝 Arquivo db.json criado em ${dbPath}`);
+}
+
 if (!fs.existsSync(tempDbPath)) {
-  fs.copyFileSync(originalDbPath, tempDbPath);
+  fs.copyFileSync(dbPath, tempDbPath);
 }
 
 const server = jsonServer.create();
@@ -75,21 +85,15 @@ server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
   const writeMethods = ['POST', 'PUT', 'PATCH', 'DELETE'];
   if (writeMethods.includes(req.method)) {
-    const originalSend = res.send;
-    res.send = function(data) {
-      originalSend.call(this, data);
-      
-      // Salva dados após a resposta ser enviada
-      setTimeout(() => {
-        try {
-          dbManager.log(`Salvando dados após ${req.method} ${req.url}`);
-          dbManager.saveToOriginal();
-          dbManager.createBackup();
-        } catch (err) {
-          dbManager.log(`Erro ao persistir dados: ${err.message}`);
-        }
-      }, 100);
-    };
+    res.on('finish', () => {
+      try {
+        const data = fs.readFileSync(tempDbPath, 'utf-8');
+        fs.writeFileSync(dbPath, data, 'utf-8');
+        console.log('Dados persistidos em', dbPath);
+      } catch (err) {
+        console.error('Erro ao persistir dados:', err.message);
+      }
+    });
   }
   next();
 });
@@ -235,5 +239,5 @@ process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
 server.use(router);
 
 server.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
+  console.log(`🚀 Backend rodando em http://localhost:${port}`);
 }); 
