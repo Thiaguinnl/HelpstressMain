@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: helpstress-backend
+    name: backendhelpstress
     env: node
     buildCommand: npm install
     startCommand: node start.js
@@ -14,4 +14,4 @@ services:
     disks:
       - name: data
         mountPath: /data
-        sizeGB: 1 
+        sizeGB: 1
