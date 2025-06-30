@@ -8,13 +8,13 @@ const dbPath = path.join(dataDir, 'db.json');
 
 console.log('🚀 Iniciando Helpstress Backend...');
 
-// Cria a pasta se ela não existir (só localmente)
+
 if (!isRender && !fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
   console.log(`📁 Diretório criado em ${dataDir}`);
 }
 
-// Cria db.json se ele não existir
+
 if (!fs.existsSync(dbPath)) {
   fs.writeFileSync(dbPath, JSON.stringify({ posts: [], usuarios: [], depoimentos: [], likedPosts: [], savedItems: [] }, null, 2));
   console.log(`📝 Arquivo db.json criado em ${dbPath}`);

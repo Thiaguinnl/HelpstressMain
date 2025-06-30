@@ -12,7 +12,6 @@ const dbPath = path.join(dataDir, 'db.json');
 
 const port = process.env.PORT || 3000;
 
-// Garante que o arquivo db.json existe
 if (!fs.existsSync(dbPath)) {
   fs.writeFileSync(dbPath, JSON.stringify({ usuarios: [], depoimentos: [], posts: [], likedPosts: [], savedItems: [] }, null, 2));
   console.log(`📝 Arquivo db.json criado em ${dbPath}`);
@@ -29,14 +28,12 @@ const db = router.db;
 
 const SECRET_KEY = 'sua_chave_secreta_aqui';
 
-// Sincroniza arquivos ao iniciar
 try {
   dbManager.syncFiles();
 } catch (err) {
   dbManager.log('Erro ao sincronizar arquivos no início: ' + err.message);
 }
 
-// Backup automático a cada 5 minutos
 setInterval(() => {
   dbManager.createBackup();
 }, 5 * 60 * 1000);
@@ -81,7 +78,6 @@ server.use(middlewares);
 
 server.use(jsonServer.bodyParser);
 
-// Middleware para persistir dados após operações de escrita - DEVE VIR ANTES DAS ROTAS
 server.use((req, res, next) => {
   const writeMethods = ['POST', 'PUT', 'PATCH', 'DELETE'];
   if (writeMethods.includes(req.method)) {
