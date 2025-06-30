@@ -8,12 +8,13 @@ const dataDir = isRender ? '/data' : path.join(__dirname, 'data');
 const dbPath = path.join(dataDir, 'db.json');
 
 console.log('🚀 Iniciando Helpstress Backend...');
-
+// Cria o diretório se não existir
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
   console.log(`📁 Diretório criado em ${dataDir}`);
 }
 
+// Cria db.json vazio se não existir
 if (!fs.existsSync(dbPath)) {
   fs.writeFileSync(dbPath, JSON.stringify({ usuarios: [] }, null, 2));
   console.log(`📝 Arquivo db.json criado em ${dbPath}`);
