@@ -14,7 +14,6 @@ if (!fs.existsSync(dataDir)) {
   console.log(`📁 Diretório criado em ${dataDir}`);
 }
 
-// Cria db.json vazio se não existir
 if (!fs.existsSync(dbPath)) {
   fs.writeFileSync(dbPath, JSON.stringify({ usuarios: [] }, null, 2));
   console.log(`📝 Arquivo db.json criado em ${dbPath}`);
