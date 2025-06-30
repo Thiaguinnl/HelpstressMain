@@ -9,13 +9,11 @@ const dbPath = path.join(dataDir, 'db.json');
 
 console.log('🚀 Iniciando Helpstress Backend...');
 
-// Cria diretório se não existir
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
   console.log(`📁 Diretório criado em ${dataDir}`);
 }
 
-// Cria arquivo db.json se não existir
 if (!fs.existsSync(dbPath)) {
   fs.writeFileSync(dbPath, JSON.stringify({ usuarios: [] }, null, 2));
   console.log(`📝 Arquivo db.json criado em ${dbPath}`);
