@@ -2,31 +2,26 @@ const fs = require('fs');
 const path = require('path');
 const dbManager = require('./api/db-manager');
 
-const baseDir = process.env.RENDER ? '/data' : path.join(__dirname, 'db');
+const isRender = process.env.RENDER === '1';
+const dataDir = isRender ? '/data' : path.join(__dirname, 'data');
+const dbPath = path.join(dataDir, 'db.json');
 
 console.log('🚀 Iniciando Helpstress Backend...');
 
-// Só cria o arquivo db.json se baseDir existir
-if (fs.existsSync(baseDir)) {
-  const dbFile = path.join(baseDir, 'db.json');
-  if (!fs.existsSync(dbFile)) {
-    const initialData = {
-      usuarios: [],
-      depoimentos: [],
-      posts: [],
-      likedPosts: [],
-      savedItems: []
-    };
-    fs.writeFileSync(dbFile, JSON.stringify(initialData, null, 2), 'utf-8');
-    console.log('📄 Arquivo db.json inicializado.');
-  }
-} else {
-  console.error('❌ Diretório base não existe:', baseDir);
-  process.exit(1);
+// Cria a pasta se ela não existir (só localmente)
+if (!isRender && !fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+  console.log(`📁 Diretório criado em ${dataDir}`);
 }
 
-// Garante que o diretório de backups existe (se necessário)
-const backupDir = path.join(baseDir, 'backups');
+// Cria db.json se ele não existir
+if (!fs.existsSync(dbPath)) {
+  fs.writeFileSync(dbPath, JSON.stringify({ posts: [], usuarios: [], depoimentos: [], likedPosts: [], savedItems: [] }, null, 2));
+  console.log(`📝 Arquivo db.json criado em ${dbPath}`);
+}
+
+// Garante que o diretório de backups existe
+const backupDir = path.join(dataDir, 'backups');
 if (!fs.existsSync(backupDir)) {
   fs.mkdirSync(backupDir, { recursive: true });
   console.log('📁 Diretório de backups criado.');
@@ -40,6 +35,17 @@ try {
   console.error('❌ Erro na sincronização inicial:', err.message);
 }
 
-// Inicia o servidor
-console.log('🌐 Iniciando servidor...');
-require('./api/index.js'); 
+// Inicia o JSON Server apontando para esse caminho
+const jsonServer = require('json-server');
+const server = jsonServer.create();
+const router = jsonServer.router(dbPath);
+const middlewares = jsonServer.defaults();
+
+server.use(middlewares);
+server.use(jsonServer.bodyParser);
+server.use(router);
+
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+  console.log(`🚀 Backend rodando em http://localhost:${port}`);
+}); 
