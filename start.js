@@ -4,9 +4,8 @@ const dbManager = require('./api/db-manager');
 const jsonServer = require('json-server');
 
 const isRender = process.env.RENDER === '1';
-const dataDir = isRender ? '/data' : path.join(__dirname, 'data');
+const dataDir = isRender ? '/data' : path.join(__dirname, 'db');
 const dbPath = path.join(dataDir, 'db.json');
-
 console.log('🚀 Iniciando Helpstress Backend...');
 // Cria o diretório se não existir
 if (!fs.existsSync(dataDir)) {
