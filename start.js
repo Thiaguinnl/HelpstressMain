@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const dbManager = require('./api/db-manager');
+const jsonServer = require('json-server');
 
 const isRender = process.env.RENDER === '1';
 const dataDir = isRender ? '/data' : path.join(__dirname, 'data');
@@ -8,15 +9,15 @@ const dbPath = path.join(dataDir, 'db.json');
 
 console.log('🚀 Iniciando Helpstress Backend...');
 
-
-if (!isRender && !fs.existsSync(dataDir)) {
+// Cria diretório se não existir
+if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
   console.log(`📁 Diretório criado em ${dataDir}`);
 }
 
-
+// Cria arquivo db.json se não existir
 if (!fs.existsSync(dbPath)) {
-  fs.writeFileSync(dbPath, JSON.stringify({ posts: [], usuarios: [], depoimentos: [], likedPosts: [], savedItems: [] }, null, 2));
+  fs.writeFileSync(dbPath, JSON.stringify({ usuarios: [] }, null, 2));
   console.log(`📝 Arquivo db.json criado em ${dbPath}`);
 }
 
@@ -35,8 +36,7 @@ try {
   console.error('❌ Erro na sincronização inicial:', err.message);
 }
 
-// Inicia o JSON Server apontando para esse caminho
-const jsonServer = require('json-server');
+// Inicializa JSON Server
 const server = jsonServer.create();
 const router = jsonServer.router(dbPath);
 const middlewares = jsonServer.defaults();
